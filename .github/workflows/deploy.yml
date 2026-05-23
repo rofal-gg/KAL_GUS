@@ -19,22 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: pip install "jupyter-book==0.15.1" matplotlib numpy pillow
-
       - name: Build book
         run: jupyter-book build .
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "_build/html"
-
   deploy:
     environment:
       name: github-pages
