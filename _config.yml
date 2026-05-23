@@ -3,12 +3,12 @@
 
 title: My sample book
 author: The Jupyter Book Community
-
+logo: foto diri.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: "off"
+  execute_notebooks: force
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -30,12 +30,3 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
-
-exclude_patterns:
-  - venv
-  - venv311
-  - "**/.git"
-
-sphinx:
-  config:
-    suppress_warnings: ["etoc.tableofcontents"]
