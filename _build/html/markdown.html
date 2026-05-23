@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Eliminasi Gaussian &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Content with notebooks" href="notebooks.html" />
+    <link rel="prev" title="Sistem Persamaan Linier" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/foto diri.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/foto diri.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Sistem Persamaan Linier
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Eliminasi Gaussian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matriks.html">Matriks Invers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="determinan.html">Evaluasi Determinan dan Matriks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Transformasi.html">Tugas transformasi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas_animasi.html">Transformasi Geometri: Pencerminan Sumbu-X</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Decomposisi.html">Tugas Dekomposisi</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmarkdown.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/markdown.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Eliminasi Gaussian</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-1-operasi-baris-dan-eliminasi">Contoh 1: Operasi baris dan eliminasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiga-operasi-dasar-baris">Tiga Operasi Dasar Baris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-penyelesaian-sistem-persamaan-empat-variabel"><strong>contoh penyelesaian sistem persamaan empat variabel</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eliminasi-gaussian">
+<h1>Eliminasi Gaussian<a class="headerlink" href="#eliminasi-gaussian" title="Permalink to this heading">#</a></h1>
+<p><strong>Eliminasi Gaussian</strong> adalah algoritma untuk menyelesaikan sistem persamaan linier dengan melakukan transformasi pada sistem agar lebih mudah dipecahkan. Dalam praktiknya, kita bekerja dengan matriks augmented yang berisi koefisien dan konstanta dari sistem persamaan.</p>
+<p>Tujuan eliminasi adalah mengubah sistem linier yang kompleks menjadi sistem yang berbentuk lebih sederhana (seperti segitiga atas), sehingga solusi variabel-variabelnya dapat ditemukan dengan mudah melalui substitusi balik.</p>
+<p>Ada tiga operasi baris yang digunakan dalam eliminasi, yang tidak mengubah solusi sistem:</p>
+<ul class="simple">
+<li><p>Tukarkan posisi ke dua persamaan.</p></li>
+<li><p>Kalikan persamaan dengan bilangan apa pun yang bukan nol.</p></li>
+<li><p>Gantikan suatu persamaan dengan jumlah persamaan itu sendiri dan kelipatan peserta lainnya.</p></li>
+</ul>
+<section id="contoh-1-operasi-baris-dan-eliminasi">
+<h2>Contoh 1: Operasi baris dan eliminasi<a class="headerlink" href="#contoh-1-operasi-baris-dan-eliminasi" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\begin{eqnarray*}
+x_1 - x_2 + x_3 &amp; = &amp; 3\\
+2x_1 + x_2 + 8x_3 &amp; = &amp; 18\\
+4x_1 + 2x_2 -3x_3 &amp; = &amp; -2
+\end{eqnarray*}
+\end{split}\end{split}\]</div>
+<p>kita dapat menukar persamaan pertama dengan yang persamaan terakhir</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\begin{eqnarray*}
+4x_1 + 2x_2 -3x_3 &amp; = &amp; -2 \\
+2x_1 + x_2 + 8x_3 &amp; = &amp; 18\\
+x_1 - x_2 + x_3 &amp; = &amp; 3
+\end{eqnarray*}
+\end{split}\end{split}\]</div>
+<p>atau kita dapat mengalikan persamaan pertama dengan 5</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\begin{eqnarray*}
+5x_1 - 5x_2 + 5x_3 &amp; = &amp; 15\\
+2x_1 + x_2 + 8x_3 &amp; = &amp; 18\\
+4x_1 + 2x_2 -3x_3 &amp; = &amp; -2
+\end{eqnarray*}
+\end{split}\end{split}\]</div>
+<p>atau kita dapat menambahkan 2 kali persamaan pertama dengan persamaan terakhir</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\begin{eqnarray*}
+x_1 - x_2 + x_3 &amp; = &amp; 3\\
+2x_1 + x_2 + 3x_3 &amp; = &amp; 8\\
+6x_1 \quad\quad -x_3 &amp; = &amp; 4
+\end{eqnarray*}
+\end{split}\end{split}\]</div>
+<p>Operasi terakhir adalah yang paling penting karena memungkinkan kita mengeliminasi variabel dari salah satu persamaan. Perhatikan bahwa persamaan ketiga tidak lagi mengandung suku x2 Ini adalah kunci dari algoritma eliminasi.</p>
+</section>
+<section id="tiga-operasi-dasar-baris">
+<h2>Tiga Operasi Dasar Baris<a class="headerlink" href="#tiga-operasi-dasar-baris" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>A.rescale_row(i, a) Fungsi: Mengalikan baris ke i dengan skala a.</p></li>
+<li><p>A.add_multiple_of_row(i, j, a) Fungsi: Menambahkan a x (baris ke-j) ke baris ke-i</p></li>
+<li><p>A.swap_rows(i, j) Fungsi: Menukar baris ke-i dengan baris ke-j</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="c1">#tambahkan -2 kali baris 0 ke baris 1</span>
+<span class="n">A</span><span class="o">.</span><span class="n">add_multiple_of_row</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="o">.</span><span class="n">add_multiple_of_row</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">A</span><span class="o">.</span><span class="n">add_multiple_of_row</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span><span class="o">.</span><span class="n">with_rescale_row</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">A</span><span class="o">.</span><span class="n">with_rescale_row</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="o">/-</span><span class="mi">19</span><span class="p">)</span>
+</pre></div>
+</div>
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>
+sagecell.makeSagecell({inputLocation: '.sage'});
+</script>
+<div class="sage">
+A= matrix([[1, -1, 1, 3], [2, 1, 8, 18], [4, 2, -3, -2]])
+A.add_multiple_of_row(0,1,-2)
+A.add_multiple_of_row(0, 2, -4)
+A.add_multiple_of_row(1, 2, -2)
+A.with_rescale_row(1, 1, 0/3)
+A.with_rescale_row(2, 1, 0/-19)
+print (A)
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 3 \\
+0 &amp; 3 &amp; 6 &amp; 12 \\
+4 &amp; 2 &amp; -3 &amp; -2
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 3 \\
+0 &amp; 3 &amp; 6 &amp; 12 \\
+0 &amp; 6 &amp; -7 &amp; -14
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 3 \\
+0 &amp; 3 &amp; 6 &amp; 12 \\
+0 &amp; 0 &amp; -19 &amp; -38
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 3 \\
+0 &amp; 1 &amp; 2 &amp; 4 \\
+0 &amp; 0 &amp; -19 &amp; -38
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 3 \\
+0 &amp; 1 &amp; 2 &amp; 4 \\
+0 &amp; 0 &amp; 1 &amp; 2
+\end{bmatrix}
+\end{split}\]</div>
+<p>hasil matrix diatas diubah kembali menjadi sistem persamaan</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+1 &amp; -1 &amp; 1 &amp; 3 \\
+0 &amp; 1 &amp; 2 &amp; 4 \\
+0 &amp; 0 &amp; 1 &amp; 2
+\end{bmatrix}\end{split}\]</div>
+<p>dan dapat ditemukan bahwa</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+x_1 - x_2 + x_3 = 3 \\
+x_2 + 2x_3 = 4 \\
+x_3 = 2
+\end{cases}
+\end{split}\]</div>
+<p>dapat diketahui bahwa X3=2 kita subtitusikan ke persamaan kedua</p>
+<div class="math notranslate nohighlight">
+\[
+x_2 + 2(2) = 4
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_2 = 0
+\]</div>
+<p>lalu  hasil X2 kita subtitusikan ke persamaan pertama</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+x_1 - 0 + 2 &amp;= 3 \\
+x_1 + 2 &amp;= 3 \\
+x_1 &amp;= 3 - 2 \\
+x_1 &amp;= 1
+\end{aligned}
+\end{split}\]</div>
+<p>bentuk himpunan penyelesaiannya (1, 0, 2)</p>
+<section id="contoh-penyelesaian-sistem-persamaan-empat-variabel">
+<h3><strong>contoh penyelesaian sistem persamaan empat variabel</strong><a class="headerlink" href="#contoh-penyelesaian-sistem-persamaan-empat-variabel" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="o">=</span><span class="n">Matriks</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+x_1 + x_2 + x_3 + x_4 = 10 \\
+2x_1 + x_2 - x_3 + x_4 = 5 \\
+x_1 - x_2 + 2x_3 - x_4 = 1 \\
+3x_1 + 2x_2 + x_3 + x_4 = 12
+\end{cases}
+\end{split}\]</div>
+<p>bentuk matrixnya:
+$<span class="math notranslate nohighlight">\(
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 10 \\
+2 &amp; 1 &amp; -1 &amp; 1 &amp; 5 \\
+1 &amp; -1 &amp; 2 &amp; -1 &amp; 1 \\
+3 &amp; 2 &amp; 1 &amp; 1 &amp; 12
+\end{bmatrix}
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+R_2 \rightarrow R_2 - 2R_1
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_3 \rightarrow R_3 - R_1
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_4 \rightarrow R_4 - 3R_1
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 10 \\
+0 &amp; -1 &amp; -3 &amp; -1 &amp; -15 \\
+0 &amp; -2 &amp; 1 &amp; -2 &amp; -9 \\
+0 &amp; -1 &amp; -2 &amp; -2 &amp; -18
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_3 \rightarrow R_3 - 2R_2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_4 \rightarrow R_4 - R_2
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 10 \\
+0 &amp; -1 &amp; -3 &amp; -1 &amp; -15 \\
+0 &amp; 0 &amp; 7 &amp; 0 &amp; 21 \\
+0 &amp; 0 &amp; 1 &amp; -1 &amp; -3
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_4 \rightarrow R_4 - \frac{1}{7}R_3
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 10 \\
+0 &amp; -1 &amp; -3 &amp; -1 &amp; -15 \\
+0 &amp; 0 &amp; 7 &amp; 0 &amp; 21 \\
+0 &amp; 0 &amp; 0 &amp; -1 &amp; -6
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_2 \rightarrow -R_2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_3 \rightarrow \frac{1}{7}R_3
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_4 \rightarrow -R_4
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 10 \\
+0 &amp; 1 &amp; 3 &amp; 1 &amp; 15 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 3 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 6
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+x_1 + x_2 + x_3 + x_4 = 10 \\
+x_2 + 3x_3 + x_4 = 15 \\
+x_3 = 3 \\
+x_4 = 6
+\end{cases}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_4 = 6
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_3 = 3
+\]</div>
+<p>subtitusikan ke persamaan kedua</p>
+<div class="math notranslate nohighlight">
+\[
+x_2 + 3(3) + 6 = 15
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_2 + 9 + 6 = 15
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_2 = 0
+\]</div>
+<p>subtitusikan ke persamaan pertama</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+x_1 + 0 + 3 + 6 &amp;= 10 \\
+x_1 + 9 &amp;= 10 \\
+x_1 &amp;= 1
+\end{aligned}
+\end{split}\]</div>
+<p>himpunan penyelesaian:</p>
+<div class="math notranslate nohighlight">
+\[
+(x_1, x_2, x_3, x_4) = (1,0,3,6)
+\]</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sistem Persamaan Linier</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="notebooks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Content with notebooks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-1-operasi-baris-dan-eliminasi">Contoh 1: Operasi baris dan eliminasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiga-operasi-dasar-baris">Tiga Operasi Dasar Baris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-penyelesaian-sistem-persamaan-empat-variabel"><strong>contoh penyelesaian sistem persamaan empat variabel</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
